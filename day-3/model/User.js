@@ -7,7 +7,6 @@ const UserSchema = new mongoose.Schema({
   hobbies: Array,
   image: String,
 });
-
 const User = mongoose.model("User", UserSchema);
 
 export default User;
