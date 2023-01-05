@@ -1,18 +1,22 @@
 import express from "express";
 import mongoose from "mongoose";
-import { PORT, MONGO_URI } from "./config.js";
 import usersRouter from "./router/user.js";
 import cors from "cors";
 
-const app = express();
+import dotenv from "dotenv";
+dotenv.config();
 
+const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/users", usersRouter);
 
+const uri = process.env.MONGO_URI || "";
+const port = process.env.PORT || 8000;
+
 const connect = () => {
   try {
-    mongoose.connect(MONGO_URI, {}).then(() => {
+    mongoose.connect(uri, {}).then(() => {
       console.log("Connected to DB");
     });
   } catch (error) {
@@ -21,7 +25,7 @@ const connect = () => {
   }
 };
 
-app.listen(PORT, async () => {
+app.listen(port, async () => {
   connect();
-  console.log(`Server running ${PORT}`);
+  console.log(`Server running ${port}`);
 });
