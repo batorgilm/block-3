@@ -19,11 +19,6 @@ const UserSchema = new mongoose.Schema({
   age: Number,
   hobbies: Array,
   image: String,
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
 });
 
 UserSchema.path("lastname").validate((lastname) => {
